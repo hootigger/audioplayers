@@ -213,7 +213,8 @@ class WrappedMediaPlayer {
         reference.updateCategory(recordingActive: recordingActive, isNotification: isNotification, playingRoute: playingRoute, duckAudio: duckAudio)
         let playbackStatus = player?.currentItem?.status
         
-        if self.url != url || playbackStatus == .failed || playbackStatus == nil {
+        // 相同url 会播放失败?? 暂时每次重新生成
+        if self.url != url || self.url == url || playbackStatus == .failed || playbackStatus == nil {
             let parsedUrl = isLocal ? URL.init(fileURLWithPath: url) : URL.init(string: url)!
             let playerItem = AVPlayerItem.init(url: parsedUrl)
             playerItem.audioTimePitchAlgorithm = AVAudioTimePitchAlgorithm.timeDomain
